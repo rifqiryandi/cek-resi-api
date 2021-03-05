@@ -9,7 +9,7 @@
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-	<title>Hello, world!</title>
+	<title></title>
 </head>
 
 <body>
@@ -68,16 +68,18 @@
 					</div>
 				</form>
 				<?php
-				$data_arr = $this->session->all_data;
+				
+				$data_arr = isset($this->session->all_data) ? $this->session->all_data : 'kosong';
 				$history = $this->session->history;
 				$detail = $this->session->detail;
 				$summary = $this->session->summary;
 				$totalWaktu = 0;
 				if ($data_arr != "kosong") {
-					// print_r($data_arr);
+						$panjang = count($history) - 1;
+					
 				?>
 					<br>
-					<p class="fw-bolder"><?= $history[0]['desc'] ?>,<?= $history[0]['date'] ?></p>
+					<p class="fw-bolder"><?= $history[$panjang]['desc'] ?>,<?= $history[$panjang]['date'] ?></p>
 					<hr>
 					<div class="row">
 						<div class="col-sm">
@@ -103,7 +105,6 @@
 						<div class="col-sm">
 							<p class="fw-bolder">Tanggal</p>
 							<?php
-							$panjang = count($history) - 1;
 							for ($i = 0; $i < count($history); $i++) {
 							?>
 								<p class="font-weight-light"><?= $history[$i]['date']; ?></p>
